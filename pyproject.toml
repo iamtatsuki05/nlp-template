@@ -2,7 +2,7 @@
 name = "nlp"
 version = "0.1.0"
 description = ""
-authors = [{ name = "Tatsuki Okada", email = "tatsukio0522@gmali.com" }]
+authors = [{ name = "Tatsuki Okada", email = "tatsukio0522@gmail.com" }]
 requires-python = ">=3.13"
 dependencies = [
     "python-dotenv>=1.0.0",
