@@ -11,9 +11,14 @@ on:
         default: false
         type: boolean
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
 
     strategy:
       matrix:
@@ -34,9 +39,10 @@ jobs:
           sudo apt-get install -y mecab libmecab-dev mecab-ipadic-utf8
 
       - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
+        uses: astral-sh/setup-uv@v10.3.3
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
 
       - name: Install dependencies
         run: |
