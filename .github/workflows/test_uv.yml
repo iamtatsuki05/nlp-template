@@ -11,9 +11,14 @@ on:
         default: false
         type: boolean
 
+concurrency:
+  group: ${{ github.workflow }}-test-uv-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
 
     strategy:
       matrix:
